@@ -1,25 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
-  --background: #0f172a; /* Deep tech-premium dark background */
+  --background: #0f172a;
   --foreground: #f8fafc;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  /* Adding a subtle gradient mesh background typical of modern OS design */
-  background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+  background-image: radial-gradient(at 0% 0%, rgb(49, 41, 92) 0, transparent 50%), 
+                    radial-gradient(at 50% 0%, hsla(225, 42%, 30%, 0.2) 0, transparent 50%), 
                     radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
   background-attachment: fixed;
 }
 
-@layer utilities {
-  /* This is your magic Glassmorphism class */
-  .glass-panel {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-2xl;
-  }
+/* Tailwind v4 native way to create custom utility classes */
+@utility glass-panel {
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
 }
