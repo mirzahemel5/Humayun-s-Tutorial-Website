@@ -1,40 +1,56 @@
-// src/app/dashboard/student/page.tsx
+// src/app/dashboard/student/course/page.tsx
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Link from 'next/link';
 
-export default function StudentDashboard() {
-  const userId = "usr_st_849204"; // Unique Student ID
+const syllabusData = [
+  {
+    moduleTitle: 'Module 1: Fundamentals of Vector Analysis',
+    lectures: [
+      { id: 'l1', title: '1.1 Introduction to Vectors & Scalars', duration: '18:24' },
+      { id: 'l2', title: '1.2 Vector Addition & Triangle Law', duration: '24:15' },
+      { id: 'l3', title: '1.3 Dot Product & Cross Product Mechanics', duration: '32:40' },
+    ]
+  }
+];
+
+export default function StudentCoursePlayerPage() {
+  const [currentVideo, setCurrentVideo] = useState({
+    title: '1.3 Dot Product & Cross Product Mechanics',
+    duration: '32:40',
+    id: 'l3'
+  });
 
   return (
-    <div className="p-8 max-w-5xl w-full mx-auto space-y-6 text-[#1E293B]">
-      <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-        <div>
-          <h3 className="text-2xl font-black tracking-tight">Welcome back, Learner! 👋</h3>
-          <p className="text-xs text-slate-400 mt-1 font-mono">Student ID: {userId}</p>
+    <div className="flex-1 flex flex-col lg:flex-row overflow-hidden h-[calc(100vh-80px)]">
+      <main className="flex-1 bg-slate-900 flex flex-col justify-between p-6 relative">
+        <div className="w-full max-w-4xl mx-auto flex items-center justify-between pb-4">
+          <Link href="/dashboard/student" className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-lg hover:bg-white/20 transition-colors">
+            ← Back to Portal
+          </Link>
         </div>
-        <div className="h-9 w-9 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center">
-          SI
+        <div className="w-full max-w-4xl mx-auto aspect-video bg-black rounded-2xl shadow-2xl relative flex items-center justify-center my-auto border border-white/5">
+          <button className="h-16 w-16 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-600/20 transition-transform active:scale-95">▶</button>
         </div>
-      </div>
+        <div className="w-full max-w-4xl mx-auto flex items-center justify-between pt-6">
+          <h3 className="text-base font-bold text-white tracking-tight">{currentVideo.title}</h3>
+        </div>
+      </main>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
-          <span className="text-2xl">📖</span>
-          <h4 className="text-xl font-black mt-2">3 Courses</h4>
-          <p className="text-xs text-slate-400 mt-1">Currently active programs</p>
+      <aside className="w-full lg:w-96 bg-white border-t lg:border-t-0 lg:border-l border-slate-200 flex flex-col overflow-y-auto z-30">
+        <div className="p-4 border-b border-slate-200 bg-slate-50/50">
+          <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Course Syllabus Playlist</h4>
         </div>
-        <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
-          <span className="text-2xl">⏳</span>
-          <h4 className="text-xl font-black mt-2">14 Hours</h4>
-          <p className="text-xs text-slate-400 mt-1">Watch time completed</p>
+        <div className="p-4 space-y-2">
+          <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-wider">{syllabusData[0].moduleTitle}</h5>
+          {syllabusData[0].lectures.map((lec) => (
+            <div key={lec.id} onClick={() => setCurrentVideo(lec)} className={`w-full p-3 rounded-xl border text-xs font-bold cursor-pointer transition-all ${currentVideo.id === lec.id ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-white border-slate-100 hover:border-slate-200 text-slate-700'}`}>
+              {lec.title}
+            </div>
+          ))}
         </div>
-        <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
-          <span className="text-2xl">🎯</span>
-          <h4 className="text-xl font-black mt-2">88% Avg</h4>
-          <p className="text-xs text-slate-400 mt-1">Mock test performance score</p>
-        </div>
-      </div>
+      </aside>
     </div>
   );
 }
