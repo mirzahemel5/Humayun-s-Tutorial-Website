@@ -11,13 +11,19 @@ export default function StudentDashboardHome() {
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h3 className="text-2xl font-black tracking-tight">Welcome back, Learner! 👋</h3>
-          <p className="text-xs text-slate-400 mt-1">Track your active curriculum lessons and complete scheduled mock items.</p>
+          <p className="text-xs text-slate-400 mt-1">Track your active curriculum lessons, participate in chat board rooms, and complete scheduled mock items.</p>
         </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
-          {/* LINK 1: To the newly added Exam sheet engine room */}
+        <div className="flex flex-wrap items-center gap-2 flex-shrink-0">
+          {/* LINK 1: Direct link right into the real-time live batch message boards */}
+          <Link 
+            href="/dashboard/student/live-chat" 
+            className="bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-2.5 px-5 rounded-xl transition-all shadow-md uppercase tracking-wide"
+          >
+            💬 Batch Chat Room
+          </Link>
           <Link 
             href="/dashboard/student/mock-test" 
-            className="bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-2.5 px-5 rounded-xl transition-all shadow-md uppercase tracking-wide"
+            className="bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs py-2.5 px-5 rounded-xl transition-all border-slate-200 uppercase tracking-wide"
           >
             📝 Take Mock Test
           </Link>
@@ -41,7 +47,6 @@ export default function StudentDashboardHome() {
           <h4 className="text-xl font-black mt-2">14 Hours</h4>
           <p className="text-xs text-slate-400 mt-1">Total classroom stream watch time</p>
         </div>
-        {/* LINK 2: Clicking the mock performance status card also redirects straight to the engine */}
         <Link 
           href="/dashboard/student/mock-test" 
           className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm hover:border-emerald-500 block hover:shadow-md transition-all group cursor-pointer"
