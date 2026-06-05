@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "TutorialHub | Learn Skills That Matter",
+  title: "Humayun's Tutorial",
   description: "Ultra-modern educational platform for skill development.",
 };
 
