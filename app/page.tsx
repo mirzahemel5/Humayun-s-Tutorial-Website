@@ -98,6 +98,8 @@ export default function RootHomepage() {
         </div>
         <div className="flex items-center gap-6 font-semibold text-sm text-slate-600">
           <Link href="/" className="text-emerald-600 hover:text-emerald-700 transition-colors">Home</Link>
+          {/* NEW LINK ELEMENT ATTACHMENT */}
+          <Link href="/store" className="hover:text-emerald-600 transition-colors whitespace-nowrap">Store</Link>
           <a href="#" className="hover:text-emerald-600 transition-colors whitespace-nowrap">Live Classes</a>
           <button onClick={() => setShowLoginModal(true)} className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition-all text-sm shadow-md">
             Login
@@ -188,13 +190,15 @@ export default function RootHomepage() {
                 <p className="text-xs text-slate-400 mt-1">Simulate signing into your specific workspace routing node.</p>
               </div>
               <div className="grid grid-cols-1 gap-2 pt-2">
-                {[
-                  { role: 'student', desc: 'Access Course Player & Mock Tests', label: 'Log In as Student' },
-                  { role: 'teacher', desc: 'Access Course Builder & Syllabus Matrix', label: 'Log In as Teacher' },
-                  { role: 'manager', desc: 'Access Campaigns & Promotional Engine', label: 'Log In as Manager' },
-                  { role: 'admin', desc: 'Access System Permissions & User Logs', label: 'Log In as Administrator' }
-                ].map((btn) => (
-                  <button key={btn.role} onClick={() => handleSimulatedLogin(btn.role as any)} className="w-full p-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 text-left rounded-xl transition-all flex flex-col group">
+                {(
+                  [
+                    { role: 'student' as const, desc: 'Access Course Player & Mock Tests', label: 'Log In as Student' },
+                    { role: 'teacher' as const, desc: 'Access Course Builder & Syllabus Matrix', label: 'Log In as Teacher' },
+                    { role: 'manager' as const, desc: 'Access Campaigns & Promotional Engine', label: 'Log In as Manager' },
+                    { role: 'admin' as const, desc: 'Access System Permissions & User Logs', label: 'Log In as Administrator' }
+                  ] as const
+                ).map((btn) => (
+                    <button key={btn.role} onClick={() => handleSimulatedLogin(btn.role)} className="w-full p-3 bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 text-left rounded-xl transition-all flex flex-col group">
                     <span className="text-xs font-black text-slate-800 group-hover:text-emerald-700 transition-colors uppercase tracking-wide">{btn.label}</span>
                     <span className="text-[10px] text-slate-400 font-medium mt-0.5">{btn.desc}</span>
                   </button>
